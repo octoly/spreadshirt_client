@@ -62,28 +62,26 @@ module SpreadshirtClient
 
     def put(path, payload, options = {})
       Timeout::timeout(timeout) {
-        as_json(RestClient.put url_for(path), payload, headers_for(:put, path, options)) }
+        RestClient.put(
+          url_for(path), payload, headers_for(:put, path, options))}
     end
 
     def post(path, payload, options = {})
       Timeout::timeout(timeout) {
-        as_json(RestClient.post url_for(path), payload, headers_for(:post, path, options)) }
+        RestClient.post(
+          url_for(path), payload, headers_for(:post, path, options))}
     end
 
     def get(path, options = {})
       Timeout::timeout(timeout) {
-        as_json(RestClient.get url_for(path), headers_for(:get, path, options)) }
+        RestClient.get(
+          url_for(path), headers_for(:get, path, options))}
     end
 
     def delete(path, options = {})
       Timeout::timeout(timeout) {
-        as_json(RestClient.delete url_for(path), headers_for(:delete, path, options)) }
-    end
-
-    private
-    def as_json xml
-      Hash.from_xml(xml).to_json
+        RestClient.delete(
+          url_for(path), headers_for(:delete, path, options))}
     end
   end
 end
-
